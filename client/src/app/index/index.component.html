@@ -1,0 +1,36 @@
+<div class="container">
+  <mat-card class="example-card container" *ngFor="let blog of blogPosts">
+    <form class="my-form" novalidate style="width: 100%" *ngIf="blog.link==''">
+      <mat-card-header>
+        <mat-card-title>
+          <!-- <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a> -->
+          <a [routerLink]="['/detail-blog/', blog._id]" target="_blank">
+            {{blog.title}}
+          </a>
+          <hr>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="panel-footer">
+          <strong>Posted by: </strong>{{blog.createdBy}}
+          <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+        </div>
+      </mat-card-content>
+    </form>
+
+    <form class="my-form" novalidate style="width: 100%" *ngIf="!blog.link==''">
+      <mat-card-header>
+        <mat-card-title>
+          <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a>
+          <hr>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="panel-footer">
+          <strong>Posted by: </strong>{{blog.createdBy}}
+          <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

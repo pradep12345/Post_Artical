@@ -16,8 +16,9 @@ export class NavbarComponent implements OnInit {
     logout() {
       
      localStorage.clear();
-     //location.reload()
      this.router.navigate(['/dashboard'])
+     location.reload()
+     
     }
   ngOnInit() {
   

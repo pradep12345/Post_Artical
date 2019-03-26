@@ -28,7 +28,8 @@ export class NewpostComponent implements OnInit {
     }
     this.newpostForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
-      body: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(2000)])
+      body: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(2000)]),
+      link: new FormControl('')
 
     });
   }
@@ -46,6 +47,7 @@ export class NewpostComponent implements OnInit {
       var textareavalue = this.textareavalue.replace(/(?:\r\n|\r|\n)/g, '\n')
       const blog = {
         title: this.newpostForm.get('title').value,
+        link: this.newpostForm.get('link').value,
         body: textareavalue,
         createdBy: this.username
       }
@@ -66,7 +68,9 @@ export class NewpostComponent implements OnInit {
   }
 
 
-
+  public onCancel = () => {
+    this.router.navigate(['/dashboard'])
+  }
 
   // ccc() {
   //   console.log(this.textareavalue)

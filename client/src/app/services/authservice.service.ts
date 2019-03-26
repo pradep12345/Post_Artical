@@ -10,10 +10,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 export class AuthserviceService {
   domain = "http://localhost:8085/";
   constructor(private http: HttpClient,
-    // public jwtHelper: JwtHelperService
-    ) { }
+  ) { }
   options
-
+  authToken
+  user
   createAuthenticationHeaders() {
     this.loadToken();
     let headers = new HttpHeaders({
@@ -22,12 +22,10 @@ export class AuthserviceService {
     let options = {
       headers: headers
     }
-
   }
   loadToken() {
     const token = localStorage.getItem('token');
     this.authToken = token;
-    console.log(this.authToken)
   }
   onRegisterSubmit_data(config) {
     return this.http.post(this.domain + 'authentication/register', config).pipe(map((res: any) => {
@@ -48,28 +46,41 @@ export class AuthserviceService {
     }))
   }
 
-  authToken
-  user
   storeUserData(token, user) {
     localStorage.setItem('access_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user
-    console.log(this.user)
   }
-
 
   public get loggedIn(): boolean {
     return (localStorage.getItem('access_token') !== null);
   }
-
-
-  
-  newBlog(blog){
-    // this.createAuthenticationHeaders();
-    return this.http.post(this.domain +'authentication/newBlog',blog).pipe(map((res: any) => {
+  newBlog(blog) {
+    return this.http.post(this.domain + 'authentication/newBlog', blog).pipe(map((res: any) => {
+      return res;
+    }))
+  }
+  getSingleBlog(id) {
+    return this.http.get(this.domain + 'authentication/singleBlog/' + id, this.options).pipe(map((res: any) => {
       return res;
     }))
   }
 
+  editBlog(blog) {
+    return this.http.put(this.domain + 'authentication/updateBlog', blog, this.options).pipe(map((res: any) => {
+      return res;
+    }))
+  }
+  deleteBlog(id) {
+    return this.http.delete(this.domain + 'authentication/deleteBlog/' + id, this.options).pipe(map((res: any) => {
+      return res;
+    }))
+  }
+  comment(blog) {
+    return this.http.put(this.domain + 'authentication/comment', blog, this.options).pipe(map((res: any) => {
+      return res;
+    }))
+  }
+  
 }

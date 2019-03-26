@@ -4,8 +4,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/database')
 const Blog = require("../models/blog")
 module.exports = (router) => {
-    router.post('/register', (req, res) => {
-
+    router.post('/register', (req, res) => {    //register user
         let user = new User({
             email: req.body.email.toLowerCase(),
             FirstName: req.body.fname,
@@ -26,7 +25,7 @@ module.exports = (router) => {
 
     })
 
-    router.post('/login', (req, res) => {
+    router.post('/login', (req, res) => {   //login verification
 
         User.findOne({ email: req.body.email }, (err, user) => {
 
@@ -50,7 +49,7 @@ module.exports = (router) => {
     })
 
 
-    router.get('/allBlogs', (req, res) => {
+    router.get('/allBlogs', (req, res) => {     //get all blogs
         Blog.find({}, (err, blogs) => {
             if (err) {
                 res.json({ success: false, message: err })
@@ -67,12 +66,12 @@ module.exports = (router) => {
     })
 
 
-    router.post('/newBlog', (req, res) => {
-
+    router.post('/newBlog', (req, res) => { //create  new blog
         const blog = new Blog({
             title: req.body.title,
             body: req.body.body,
-            createdBy: req.body.createdBy
+            createdBy: req.body.createdBy,
+            link: req.body.link
         });
         blog.save((err) => {
             if (err) {
@@ -81,9 +80,111 @@ module.exports = (router) => {
                 res.json({ success: true, message: "Blog Saved Successfully" })
             }
         })
-
-
     })
+
+    router.get('/singleBlog/:id', (req, res) => {   //get single blog for edit
+        Blog.findOne({ _id: req.params.id }, (err, blog) => {
+            if (err) {
+                res.json({ success: false, message: "Not a Valid blog Id" })
+            } else {
+                if (!blog) {
+                    res.json({ success: true, message: "Blog Not Found---" })
+
+                } else {
+                    res.json(({ success: true, blog: blog }))
+                }
+            }
+        })
+    })
+
+    router.put('/updateBlog', (req, res) => {
+        if (!req.body._id) {
+            res.json({ success: true, message: "No Blogs Id Provided" })
+        }
+        else {
+            Blog.findOne({ _id: req.body._id }, (err, blog) => {
+                if (err) {
+                    res.json({ success: false, message: "Not a Valid blog Id" })
+                } else {
+                    if (!blog) {
+                        res.json({ success: true, message: "Blog Not Found" })
+                    } else {
+                        blog.title = req.body.title;
+                        blog.body = req.body.body;
+                        link: req.body.link
+                        blog.save((err) => {
+                            if (err) {
+                                res.json({ success: false, message: err })
+                            } else {
+                                res.json({ success: true, message: "Blog updated" })
+                            }
+                        })
+                      
+                    }
+                }
+            })
+        }
+    })
+
+
+    
+router.delete('/deleteBlog/:id',(req,res)=>{
+    console.log(req.params.id)
+    if (!req.params.id) {
+        res.json({ success: true, message: "No Blogs Id Provided" })
+    }
+    else {
+        Blog.findOne({ _id: req.params.id }, (err, blog) => {
+            if (err) {
+                res.json({ success: false, message: "Not a Valid blog Id" })
+            } else {
+                if (!blog) {
+                    res.json({ success: true, message: "Blog Not Found" })
+                } else {
+                    blog.remove((err) => {
+                        if (err) {
+                            res.json({ success: false, message: err })
+                        } else {
+                            res.json({ success: true, message: "Blog Deleted" })
+                        }
+                    })
+                 
+                }
+            }
+        })
+    }
+})
+
+router.put('/comment', (req, res) => {
+    if (!req.body._id) {
+        res.json({ success: true, message: "No Blogs Id Provided" })
+    }
+    else {
+        Blog.findOne({ _id: req.body._id }, (err, blog) => {
+            if (err) {
+                res.json({ success: false, message: "Not a Valid blog Id" })
+            } else {
+                if (!blog) {
+                    res.json({ success: true, message: "Blog Not Found" })
+                } else {                    
+                    blog.coments=[{
+                        comment:req.body.comment,
+                        commentator:req.body.createdBy
+                    }]
+                    blog.save((err) => {
+                        if (err) {
+                            res.json({ success: false, message: err })
+                        } else {
+                             res.json({ success: true, message: "Blog updated" })
+                        }
+                    })
+                  
+                }
+            }
+        })
+    }
+})
+
 
     return router
 }

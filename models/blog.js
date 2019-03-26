@@ -7,6 +7,7 @@ const blogSchema = mongoose.Schema({
     title: { type: String},
     body: { type: String },
     createdBy: { type: String },
+    link: { type: String },
     createAt: { type: Date, default: Date.now() },
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },

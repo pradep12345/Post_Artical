@@ -18,6 +18,10 @@ import {AuthserviceService} from "./services/authservice.service"
 // import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NewpostComponent } from './newpost/newpost.component';
+import { EditblogComponent } from './editblog/editblog.component';
+import { DeleteblogComponent } from './deleteblog/deleteblog.component';
+import { IndexComponent } from './index/index.component';
+import { BlogdetailsComponent } from './blogdetails/blogdetails.component';
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
@@ -28,7 +32,11 @@ export function tokenGetter() {
     RegisterComponent,
     DashboardComponent,
     NavbarComponent,
-    NewpostComponent
+    NewpostComponent,
+    EditblogComponent,
+    DeleteblogComponent,
+    IndexComponent,
+    BlogdetailsComponent
   ],
   imports: [
     BrowserModule,
