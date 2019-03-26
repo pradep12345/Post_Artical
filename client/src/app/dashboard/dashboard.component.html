@@ -2,9 +2,11 @@
   <mat-card class="example-card container" *ngFor="let blog of blogPosts">
     <form class="my-form" novalidate style="width: 100%">
       <mat-card-header>
-        <mat-card-title  class="jumbotron" style="width: 100%">
+        <mat-card-title  >
           <strong> {{blog.title}}</strong>
+          <hr>
         </mat-card-title>
+        
       </mat-card-header>
       <mat-card-content >
         <div class="panel-body">
