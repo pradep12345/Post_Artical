@@ -1,0 +1,41 @@
+<div class="container">
+  <mat-card class="example-card container">
+
+    <form class="my-form" [formGroup]="loginForm" style="margin: 0 auto" align="center" (ngSubmit)="login(loginForm.value)">
+      <mat-card-header style="width:100%" >
+        <mat-card-title style="width:100%" >Login</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content  style="width:100%">
+        <table class="example-full-width" cellspacing="0" style="width:100%">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="EmailId" formControlName="email" name="email" [email]="true">
+                <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
+                <mat-error *ngIf="hasError('email', 'maxlength')">You have more than 35 characters</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" formControlName="password"  type="password" name="password" >
+                <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+                <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 8 characters</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+
+
+        <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
+      </mat-card-content>
+      <mat-card-actions  align="center">
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button>
+        <mat-error >{{message}}</mat-error>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
