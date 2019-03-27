@@ -1,29 +1,31 @@
 <div class="container">
-  <mat-card class="example-card container" *ngFor="let blog of blogPosts">
+  <mat-card class="example-card container"
+    *ngFor="let blog of blogPosts | paginate: { itemsPerPage: 10, currentPage: p }">
     <form class="my-form" novalidate style="width: 100%" *ngIf="blog.link==''">
       <mat-card-header style="width: 100% !important">
         <mat-card-title style="width: 100% !important">
           <!-- <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a> -->
+
           
-          <strong>Title: </strong>
-          <a [routerLink]="['/detail-blog/', blog._id]" >
+          <strong><a [routerLink]="['/detail-blog/', blog._id]">
             {{blog.title}}
-          </a>
+          </a></strong>
           <hr>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="panel-footer" *ngIf="blog.coments?.length > 0">
           <!-- <strong>Comments: </strong><p *ngFor="let blog_coment of blog.coments"> {{blog_coment.comment}}</p> -->
-          <strong>Comments: </strong><p *ngFor="let blog_coment of blog.coments" > {{blog_coment.comment}}</p>
-          <strong>Posted by: </strong>{{blog.createdBy}}
-          <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+          <strong>Comments: </strong>
+          <p *ngFor="let blog_coment of blog.coments"> {{blog_coment.comment}}</p>
+          <strong><i>Posted by: </i> </strong>{{blog.createdBy}}
+          <strong><i>Date: </i> </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
         <div class="panel-footer">
-          <strong>Posted by: </strong>{{blog.createdBy}}
-          <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+          <strong><i>Posted by: </i> </strong>{{blog.createdBy}}
+          <strong><i>Date: </i></strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
-        
+
         <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
           <button type="button" name="button" class="btn btn-sm btn-info"
             style="margin-right: 10px !important">Edit</button>
@@ -57,4 +59,8 @@
       </mat-card-content>
     </form>
   </mat-card>
+</div>
+<div class="container" style="text-align:center">
+  
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

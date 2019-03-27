@@ -12,16 +12,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { from } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import {AuthserviceService} from "./services/authservice.service"
-
-// import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NewpostComponent } from './newpost/newpost.component';
 import { EditblogComponent } from './editblog/editblog.component';
 import { DeleteblogComponent } from './deleteblog/deleteblog.component';
 import { IndexComponent } from './index/index.component';
 import { BlogdetailsComponent } from './blogdetails/blogdetails.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
@@ -46,6 +44,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -54,9 +53,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthserviceService,
-    // JwtHelperService
-  ],
+  providers: [AuthserviceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
