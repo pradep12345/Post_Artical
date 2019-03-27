@@ -4,6 +4,8 @@
       <mat-card-header style="width: 100% !important">
         <mat-card-title style="width: 100% !important">
           <!-- <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a> -->
+          
+          <strong>Title: </strong>
           <a [routerLink]="['/detail-blog/', blog._id]" >
             {{blog.title}}
           </a>

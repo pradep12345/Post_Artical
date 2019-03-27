@@ -18,27 +18,29 @@ export class BlogdetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthserviceService,
     private router: Router) { }
-    currentUrl
-    message
-    blog
-    username
-    comments_details
+  currentUrl
+  message
+  blog
+  username
+  comments_details
+  blogPosts = []
   ngOnInit() {
- 
+
     this.currentUrl = this.activatedRoute.snapshot.params;
     this.authService.getSingleBlog(this.currentUrl.id).subscribe(data => {
       if (!data.success) {
         this.message = "Blog not Found"
       } else {
-        console.log( data.blog)
         this.blog = data.blog;
+        this.blogPosts.push(data.blog)
+        console.log(this.blogPosts)
       }
     })
     this.newpostForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
       body: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(2000)]),
       link: new FormControl(''),
-      coments:new FormControl(''),
+      coments: new FormControl(''),
     });
 
     this.newpostForm.controls["title"].disable();
@@ -62,12 +64,12 @@ export class BlogdetailsComponent implements OnInit {
     }
     console.log(blog)
     this.authService.comment(this.blog).subscribe(data => {
-     if (!data.success) {
+      if (!data.success) {
         this.message = data.message;
 
       } else {
         this.message = data.message;
-        
+
         // this.router.navigate(['/detail-blog/',this.blog._id])
         this.router.navigate(['/index'])
       }
