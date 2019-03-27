@@ -24,7 +24,7 @@ export class NewpostComponent implements OnInit {
       this.username = item.FirstName
     }else{
       
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/index'])
     }
     this.newpostForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
@@ -58,7 +58,7 @@ export class NewpostComponent implements OnInit {
         if (vdata['success'] == true) {
           this.message = vdata['message']
           setTimeout(() => {
-            this.router.navigate(['/dashboard'])
+            this.router.navigate(['/index'])
           }, 2000)
         } else {
           this.message = vdata['message']
@@ -69,7 +69,7 @@ export class NewpostComponent implements OnInit {
 
 
   public onCancel = () => {
-    this.router.navigate(['/dashboard'])
+    this.router.navigate(['/index'])
   }
 
   // ccc() {

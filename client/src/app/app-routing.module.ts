@@ -12,7 +12,7 @@ import {BlogdetailsComponent} from "./blogdetails/blogdetails.component"
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: IndexComponent
   },
   {
     path: 'dashboard',

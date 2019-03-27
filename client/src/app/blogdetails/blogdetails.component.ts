@@ -22,16 +22,15 @@ export class BlogdetailsComponent implements OnInit {
     message
     blog
     username
+    comments_details
   ngOnInit() {
-    if (localStorage.length > 0) {
-      let item = JSON.parse(localStorage.getItem("user"))
-      this.username = item.FirstName
-    }
+ 
     this.currentUrl = this.activatedRoute.snapshot.params;
     this.authService.getSingleBlog(this.currentUrl.id).subscribe(data => {
       if (!data.success) {
         this.message = "Blog not Found"
       } else {
+        console.log( data.blog)
         this.blog = data.blog;
       }
     })
@@ -45,6 +44,12 @@ export class BlogdetailsComponent implements OnInit {
     this.newpostForm.controls["title"].disable();
     this.newpostForm.controls["body"].disable();
     this.newpostForm.controls["link"].disable();
+    this.newpostForm.controls["coments"].disable();
+    if (localStorage.length > 0) {
+      let item = JSON.parse(localStorage.getItem("user"))
+      this.username = item.FirstName
+      this.newpostForm.controls["coments"].enable();
+    }
   }
 
   onComment() {
@@ -55,6 +60,7 @@ export class BlogdetailsComponent implements OnInit {
       comment: this.blog.coments,
       createdBy: this.username
     }
+    console.log(blog)
     this.authService.comment(this.blog).subscribe(data => {
      if (!data.success) {
         this.message = data.message;
@@ -62,14 +68,14 @@ export class BlogdetailsComponent implements OnInit {
       } else {
         this.message = data.message;
         
-        this.router.navigate(['/detail-blog/',this.blog._id])
-        // this.router.navigate(['/dashboard'])
+        // this.router.navigate(['/detail-blog/',this.blog._id])
+        this.router.navigate(['/index'])
       }
     })
 
   }
 
   public onCancel = () => {
-    
+    this.router.navigate(['/index'])
   }
 }

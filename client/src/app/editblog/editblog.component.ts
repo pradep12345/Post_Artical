@@ -38,7 +38,7 @@ export class EditblogComponent implements OnInit {
         }
       })
     } else {
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/index'])
     }
     this.newpostForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]),
@@ -68,7 +68,7 @@ export class EditblogComponent implements OnInit {
       } else {
         this.message = data.message;
         setTimeout(() => {
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/index'])
         }, 2000)
       }
     })
@@ -76,7 +76,7 @@ export class EditblogComponent implements OnInit {
   }
 
   public onCancel = () => {
-    this.router.navigate(['/dashboard'])
+    this.router.navigate(['/index'])
   }
 
 }

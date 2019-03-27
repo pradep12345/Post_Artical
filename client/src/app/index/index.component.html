@@ -1,26 +1,41 @@
 <div class="container">
   <mat-card class="example-card container" *ngFor="let blog of blogPosts">
     <form class="my-form" novalidate style="width: 100%" *ngIf="blog.link==''">
-      <mat-card-header>
-        <mat-card-title>
+      <mat-card-header style="width: 100% !important">
+        <mat-card-title style="width: 100% !important">
           <!-- <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a> -->
-          <a [routerLink]="['/detail-blog/', blog._id]" target="_blank">
+          <a [routerLink]="['/detail-blog/', blog._id]" >
             {{blog.title}}
           </a>
           <hr>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
+        <div class="panel-footer" *ngIf="blog.coments?.length > 0">
+          <!-- <strong>Comments: </strong><p *ngFor="let blog_coment of blog.coments"> {{blog_coment.comment}}</p> -->
+          <strong>Comments: </strong><p *ngFor="let blog_coment of blog.coments" > {{blog_coment.comment}}</p>
+          <strong>Posted by: </strong>{{blog.createdBy}}
+          <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+        </div>
         <div class="panel-footer">
           <strong>Posted by: </strong>{{blog.createdBy}}
           <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
+        
+        <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
+          <button type="button" name="button" class="btn btn-sm btn-info"
+            style="margin-right: 10px !important">Edit</button>
+        </a>
+        <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy">
+          <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
+        </a>
+
       </mat-card-content>
     </form>
 
     <form class="my-form" novalidate style="width: 100%" *ngIf="!blog.link==''">
-      <mat-card-header>
-        <mat-card-title>
+      <mat-card-header style="width: 100% !important">
+        <mat-card-title style="width: 100% !important">
           <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a>
           <hr>
         </mat-card-title>
@@ -30,6 +45,13 @@
           <strong>Posted by: </strong>{{blog.createdBy}}
           <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
+        <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
+          <button type="button" name="button" class="btn btn-sm btn-info"
+            style="margin-right: 10px !important">Edit</button>
+        </a>
+        <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy">
+          <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
+        </a>
       </mat-card-content>
     </form>
   </mat-card>

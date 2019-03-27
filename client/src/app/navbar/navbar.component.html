@@ -7,11 +7,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" routerLink="/dashboard">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link " routerLink="/index">Index</a>
+        <!-- <a class="nav-item nav-link active" routerLink="/dashboard">Home <span class="sr-only">(current)</span></a> -->
+        <a class="nav-item nav-link active " routerLink="/index">Index <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" *ngIf="!authService.loggedIn" routerLink="/login">Login</a>
         <a class="nav-item nav-link" *ngIf="!authService.loggedIn" routerLink="/register">Register</a>
-        <a class="nav-item nav-link" *ngIf="authService.loggedIn"style="cursor: pointer" (click)="logout()">LogOut</a>
+        <a class="nav-item nav-link" *ngIf="authService.loggedIn"style="cursor: pointer" (click)="logout()">Log Out</a>
         <a class="nav-item nav-link" *ngIf="authService.loggedIn" routerLink="/newpost">New Post</a>
       </div>
     </div>

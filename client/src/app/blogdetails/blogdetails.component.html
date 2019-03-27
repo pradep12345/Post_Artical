@@ -3,7 +3,7 @@
 
     <form class="my-form" [formGroup]="newpostForm" style="margin: 0 auto" novalidate (ngSubmit)="onComment()">
       <mat-card-header>
-        <mat-card-title>Delete Post</mat-card-title>
+        <mat-card-title>Post Details</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <mat-form-field class="full-width" style="width: 100%">
@@ -24,15 +24,22 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" style="width: 100%">
-        <textarea matInput [(ngModel)]="blog.coments.comment" name="coments" rows="8" cols="80" placeholder="coments" 
+        <!-- <textarea matInput [(ngModel)]="blg.comment"  *ngFor="let blog of comments_details"  *ngIf="!authService.loggedIn"  name="coments" rows="8" cols="80" placeholder="coments" 
+        class="form-control" ></textarea> -->
+
+        <textarea matInput [(ngModel)]="blog.coments" name="coments"   *ngIf="authService.loggedIn"rows="8" cols="80" placeholder="coments" 
         class="form-control" formControlName="coments"></textarea>
 
       </mat-form-field>
+
+      <!-- <mat-form-field class="example-full-width" style="width: 100%">
+ 
+      </mat-form-field> -->
+
       <mat-card-actions align="center">
-
-
         <button mat-raised-button color="primary" *ngIf="authService.loggedIn">Submit Comment</button>
         <button type="button" mat-raised-button color="warn" *ngIf="authService.loggedIn" (click)="onCancel()">Cancel</button>
+        <button type="button" mat-raised-button color="warn" *ngIf="!authService.loggedIn" (click)="onCancel()">Back</button>
         <mat-error>{{message}}</mat-error>
       </mat-card-actions>
     </form>

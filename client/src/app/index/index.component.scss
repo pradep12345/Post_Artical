@@ -3,3 +3,14 @@ a {
     text-decoration: none;
     background-color: transparent;
 }
+hr {
+    /* margin-top: 1rem; */
+    /* margin-bottom: 1rem; */
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.mat-card-header-text {
+    margin: 0 16px;
+    width: 100%;
+}

@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   public onCancel = () => {
-    this.router.navigate(['/dashboard'])
+    this.router.navigate(['/index'])
   }
   public hasError = (controlName: string, errorName: string) => {
     return this.registerForm.controls[controlName].hasError(errorName);

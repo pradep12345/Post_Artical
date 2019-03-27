@@ -166,9 +166,11 @@ router.put('/comment', (req, res) => {
             } else {
                 if (!blog) {
                     res.json({ success: true, message: "Blog Not Found" })
-                } else {                    
+                } else {         
+                    console.log(req.body.coments)           
+                    console.log(req.body)           
                     blog.coments=[{
-                        comment:req.body.comment,
+                        comment:req.body.coments,
                         commentator:req.body.createdBy
                     }]
                     blog.save((err) => {
