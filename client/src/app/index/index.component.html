@@ -4,18 +4,14 @@
     <form class="my-form" novalidate style="width: 100%" *ngIf="blog.link==''">
       <mat-card-header style="width: 100% !important">
         <mat-card-title style="width: 100% !important">
-          <!-- <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a> -->
-
-          
           <strong><a [routerLink]="['/detail-blog/', blog._id]">
-            {{blog.title}}
-          </a></strong>
+              {{blog.title}}
+            </a></strong>
           <hr>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="panel-footer" *ngIf="blog.coments?.length > 0">
-          <!-- <strong>Comments: </strong><p *ngFor="let blog_coment of blog.coments"> {{blog_coment.comment}}</p> -->
           <strong>Comments: </strong>
           <p *ngFor="let blog_coment of blog.coments"> {{blog_coment.comment}}</p>
           <strong><i>Posted by: </i> </strong>{{blog.createdBy}}
@@ -61,6 +57,6 @@
   </mat-card>
 </div>
 <div class="container" style="text-align:center">
-  
+
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

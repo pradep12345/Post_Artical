@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-// import { tokenNotExpired } from 'angular2-jwt';
-// import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +80,5 @@ export class AuthserviceService {
       return res;
     }))
   }
-  
+
 }

@@ -40,7 +40,6 @@ module.exports = (router) => {
                         res.json({ success: false, message: "Password Invalid" })
                     } else {
                         const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' })
-                        console.log(token)
                         res.json({ success: true, message: "Success!", token: token, user: { username: user.email, FirstName: user.FirstName } })
                     }
                 }
@@ -97,7 +96,7 @@ module.exports = (router) => {
         })
     })
 
-    router.put('/updateBlog', (req, res) => {
+    router.put('/updateBlog', (req, res) => {   //update blog based on _id
         if (!req.body._id) {
             res.json({ success: true, message: "No Blogs Id Provided" })
         }
@@ -119,7 +118,7 @@ module.exports = (router) => {
                                 res.json({ success: true, message: "Blog updated" })
                             }
                         })
-                      
+
                     }
                 }
             })
@@ -127,65 +126,62 @@ module.exports = (router) => {
     })
 
 
-    
-router.delete('/deleteBlog/:id',(req,res)=>{
-    console.log(req.params.id)
-    if (!req.params.id) {
-        res.json({ success: true, message: "No Blogs Id Provided" })
-    }
-    else {
-        Blog.findOne({ _id: req.params.id }, (err, blog) => {
-            if (err) {
-                res.json({ success: false, message: "Not a Valid blog Id" })
-            } else {
-                if (!blog) {
-                    res.json({ success: true, message: "Blog Not Found" })
-                } else {
-                    blog.remove((err) => {
-                        if (err) {
-                            res.json({ success: false, message: err })
-                        } else {
-                            res.json({ success: true, message: "Blog Deleted" })
-                        }
-                    })
-                 
-                }
-            }
-        })
-    }
-})
 
-router.put('/comment', (req, res) => {
-    if (!req.body._id) {
-        res.json({ success: true, message: "No Blogs Id Provided" })
-    }
-    else {
-        Blog.findOne({ _id: req.body._id }, (err, blog) => {
-            if (err) {
-                res.json({ success: false, message: "Not a Valid blog Id" })
-            } else {
-                if (!blog) {
-                    res.json({ success: true, message: "Blog Not Found" })
-                } else {         
-                    console.log(req.body.coments)           
-                    console.log(req.body)           
-                    blog.coments=[{
-                        comment:req.body.coments,
-                        commentator:req.body.createdBy
-                    }]
-                    blog.save((err) => {
-                        if (err) {
-                            res.json({ success: false, message: err })
-                        } else {
-                             res.json({ success: true, message: "Blog updated" })
-                        }
-                    })
-                  
+    router.delete('/deleteBlog/:id', (req, res) => {     //delete blog based on _id
+        if (!req.params.id) {
+            res.json({ success: true, message: "No Blogs Id Provided" })
+        }
+        else {
+            Blog.findOne({ _id: req.params.id }, (err, blog) => {
+                if (err) {
+                    res.json({ success: false, message: "Not a Valid blog Id" })
+                } else {
+                    if (!blog) {
+                        res.json({ success: true, message: "Blog Not Found" })
+                    } else {
+                        blog.remove((err) => {
+                            if (err) {
+                                res.json({ success: false, message: err })
+                            } else {
+                                res.json({ success: true, message: "Blog Deleted" })
+                            }
+                        })
+
+                    }
                 }
-            }
-        })
-    }
-})
+            })
+        }
+    })
+
+    router.put('/comment', (req, res) => {   //Add comments
+        if (!req.body._id) {
+            res.json({ success: true, message: "No Blogs Id Provided" })
+        }
+        else {
+            Blog.findOne({ _id: req.body._id }, (err, blog) => {
+                if (err) {
+                    res.json({ success: false, message: "Not a Valid blog Id" })
+                } else {
+                    if (!blog) {
+                        res.json({ success: true, message: "Blog Not Found" })
+                    } else {
+                        blog.coments = [{
+                            comment: req.body.coments,
+                            commentator: req.body.createdBy
+                        }]
+                        blog.save((err) => {
+                            if (err) {
+                                res.json({ success: false, message: err })
+                            } else {
+                                res.json({ success: true, message: "Blog updated" })
+                            }
+                        })
+
+                    }
+                }
+            })
+        }
+    })
 
 
     return router

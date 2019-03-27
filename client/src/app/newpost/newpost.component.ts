@@ -20,7 +20,6 @@ export class NewpostComponent implements OnInit {
   ngOnInit() {
     if (localStorage.length > 0) {
       let item = JSON.parse(localStorage.getItem("user"))
-      console.log(item.FirstName)
       this.username = item.FirstName
     }else{
       
@@ -51,7 +50,6 @@ export class NewpostComponent implements OnInit {
         body: textareavalue,
         createdBy: this.username
       }
-      console.log(blog)
       this.authService.newBlog(blog).subscribe(data => {
         var vdata = {}
         vdata = data
@@ -72,10 +70,4 @@ export class NewpostComponent implements OnInit {
     this.router.navigate(['/index'])
   }
 
-  // ccc() {
-  //   console.log(this.textareavalue)
-  //   var a = this.textareavalue.replace(/(?:\r\n|\r|\n)/g, '\\n')
-
-  //   console.log(a)
-  // }
 }

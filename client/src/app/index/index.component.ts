@@ -27,11 +27,9 @@ export class IndexComponent implements OnInit {
   getAllBlogs() {
     if (localStorage.length > 0) {
       let item = JSON.parse(localStorage.getItem("user"))
-      console.log(item.FirstName)
       this.username = item.FirstName
     }
     this.authService.getAllBlogs().subscribe(data => {
-      console.log(data)
       this.blogPosts = data.blogs
     })
   }

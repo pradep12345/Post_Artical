@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
       if (!data.success) {
         this.message = data.message;
       } else {
-        console.log(data)
         this.authService.storeUserData(data.token,data.user)
         this.message = data.message;
         setTimeout(() => {
@@ -34,7 +33,6 @@ export class LoginComponent implements OnInit {
         }, 2000)
       }
 
-      console.log(data)
     })
   }
   ngOnInit() {

@@ -33,7 +33,6 @@ export class BlogdetailsComponent implements OnInit {
       } else {
         this.blog = data.blog;
         this.blogPosts.push(data.blog)
-        console.log(this.blogPosts)
       }
     })
     this.newpostForm = new FormGroup({
@@ -62,15 +61,12 @@ export class BlogdetailsComponent implements OnInit {
       comment: this.blog.coments,
       createdBy: this.username
     }
-    console.log(blog)
     this.authService.comment(this.blog).subscribe(data => {
       if (!data.success) {
         this.message = data.message;
 
       } else {
         this.message = data.message;
-
-        // this.router.navigate(['/detail-blog/',this.blog._id])
         this.router.navigate(['/index'])
       }
     })

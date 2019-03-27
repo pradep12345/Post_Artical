@@ -2,13 +2,13 @@
   <mat-card class="example-card container" *ngFor="let blog of blogPosts">
     <form class="my-form" novalidate style="width: 100%">
       <mat-card-header>
-        <mat-card-title  >
+        <mat-card-title>
           <strong> {{blog.title}}</strong>
           <hr>
         </mat-card-title>
-        
+
       </mat-card-header>
-      <mat-card-content >
+      <mat-card-content>
         <div class="panel-body">
           <pre>{{blog.body}}</pre>
         </div>
@@ -16,8 +16,6 @@
           <strong>Posted by: </strong>{{blog.createdBy}}
           <br>
           <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
-          <!-- <strong>Likes: </strong>{{blog.likes}}
-          <strong>Dislikes: </strong>{{blog.dislikes}} -->
           <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
             <button type="button" name="button" class="btn btn-sm btn-info"
               style="margin-right: 10px !important">Edit</button>
@@ -25,8 +23,6 @@
           <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy">
             <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
           </a>
-          <!-- <button mat-raised-button color="primary" *ngIf="!authService.loggedIn">Login</button> -->
-          <!-- <button mat-raised-button color="primary" (click)="logout()" >logout</button> -->
         </div>
       </mat-card-content>
     </form>

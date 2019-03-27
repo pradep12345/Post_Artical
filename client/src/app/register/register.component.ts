@@ -36,11 +36,11 @@ export class RegisterComponent implements OnInit {
   public onCancel = () => {
     this.router.navigate(['/index'])
   }
-  public hasError = (controlName: string, errorName: string) => {
+  public hasError = (controlName: string, errorName: string) => { //form validation
     return this.registerForm.controls[controlName].hasError(errorName);
   }
 
-  onRegisterSubmit(form) {
+  onRegisterSubmit(form) {  //submit register details
     const user = {
       email: this.registerForm.get('email').value,
       fname: this.registerForm.get('fname').value,
@@ -48,10 +48,7 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.get('password').value
     }
 
-    console.log(user)
     this.authService.onRegisterSubmit_data(user).subscribe(data => {
-      console.log(data)
-      console.log(data.success)
       var vdata={}
       vdata=data
        if(vdata['success']==true){
@@ -62,7 +59,6 @@ export class RegisterComponent implements OnInit {
        }else{
         this.message=vdata['message']
        }
-      console.log(vdata['success'])
     })
   }
 
