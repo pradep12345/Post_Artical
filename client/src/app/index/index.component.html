@@ -36,14 +36,14 @@
     <form class="my-form" novalidate style="width: 100%" *ngIf="!blog.link==''">
       <mat-card-header style="width: 100% !important">
         <mat-card-title style="width: 100% !important">
-          <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a>
-          <hr>
+          <strong> <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a>
+            <hr></strong>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="panel-footer">
-          <strong>Posted by: </strong>{{blog.createdBy}}
-          <strong>Date: </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+          <strong> <i>Posted by:</i> </strong>{{blog.createdBy}}
+          <strong><i>Date:</i> </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
         <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
           <button type="button" name="button" class="btn btn-sm btn-info"
