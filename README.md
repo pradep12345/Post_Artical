@@ -25,4 +25,7 @@
 ![alt text](https://res.cloudinary.com/pradepb/image/upload/v1553933259/Post_Artical_link/delete_post.png)
 
 # Post with Comments
+![alt text](https://res.cloudinary.com/pradepb/image/upload/v1553933259/Post_Artical_link/Add_comments.png)
+
+# Post with Comments
 ![alt text](https://res.cloudinary.com/pradepb/image/upload/v1553933258/Post_Artical_link/index_with_comments.png)
