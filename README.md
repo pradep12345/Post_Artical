@@ -1,4 +1,4 @@
-# Post and Artical link based Application
+# Post and Article link based Application
 
 # Register Page
 ![alt text](https://res.cloudinary.com/pradepb/image/upload/v1553933259/Post_Artical_link/register.png)
