@@ -20,8 +20,8 @@ import { DeleteblogComponent } from './deleteblog/deleteblog.component';
 import { IndexComponent } from './index/index.component';
 import { BlogdetailsComponent } from './blogdetails/blogdetails.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-
-import { FilterPipeModule } from 'ngx-filter-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter'
+// import { FilterPipeModule } from 'ngx-filter-pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -48,7 +48,8 @@ export function tokenGetter() {
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    FilterPipeModule,
+    Ng2SearchPipeModule,
+    
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

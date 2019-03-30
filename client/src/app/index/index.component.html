@@ -1,12 +1,19 @@
 <div class="container">
-  <mat-card class="example-card container"
-    *ngFor="let blog of blogPosts | paginate: { itemsPerPage: 10, currentPage: p }">
+
+
+  <mat-form-field>
+    <input matInput placeholder="Search items" [(ngModel)]="term">
+  </mat-form-field>
+
+  <mat-card class="example-card container" *ngFor="let blog of blogPosts | paginate: { itemsPerPage: 10, currentPage: p } | filter:term;">
     <form class="my-form" novalidate style="width: 100%" *ngIf="blog.link==''">
       <mat-card-header style="width: 100% !important">
         <mat-card-title style="width: 100% !important">
-          <strong><a [routerLink]="['/detail-blog/', blog._id]">
+          <strong>
+            <a [routerLink]="['/detail-blog/', blog._id]">
               {{blog.title}}
-            </a></strong>
+            </a>
+          </strong>
           <hr>
         </mat-card-title>
       </mat-card-header>
@@ -14,17 +21,24 @@
         <div class="panel-footer" *ngIf="blog.coments?.length > 0">
           <strong>Comments: </strong>
           <p *ngFor="let blog_coment of blog.coments"> {{blog_coment.comment}}</p>
-          <strong><i>Posted by: </i> </strong>{{blog.createdBy}}
-          <strong><i>Date: </i> </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+          <strong>
+            <i>Posted by: </i>
+          </strong>{{blog.createdBy}}
+          <strong>
+            <i>Date: </i>
+          </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
         <div class="panel-footer">
-          <strong><i>Posted by: </i> </strong>{{blog.createdBy}}
-          <strong><i>Date: </i></strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+          <strong>
+            <i>Posted by: </i>
+          </strong>{{blog.createdBy}}
+          <strong>
+            <i>Date: </i>
+          </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
 
         <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
-          <button type="button" name="button" class="btn btn-sm btn-info"
-            style="margin-right: 10px !important">Edit</button>
+          <button type="button" name="button" class="btn btn-sm btn-info" style="margin-right: 10px !important">Edit</button>
         </a>
         <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy">
           <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
@@ -36,18 +50,23 @@
     <form class="my-form" novalidate style="width: 100%" *ngIf="!blog.link==''">
       <mat-card-header style="width: 100% !important">
         <mat-card-title style="width: 100% !important">
-          <strong> <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a>
-            <hr></strong>
+          <strong>
+            <a class="nav-item nav-link" href="{{blog.link}}" target="_blank">{{blog.title}}</a>
+            <hr>
+          </strong>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="panel-footer">
-          <strong> <i>Posted by:</i> </strong>{{blog.createdBy}}
-          <strong><i>Date:</i> </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
+          <strong>
+            <i>Posted by:</i>
+          </strong>{{blog.createdBy}}
+          <strong>
+            <i>Date:</i>
+          </strong>{{blog.createAt | date: 'MMM dd, yyyy'}}
         </div>
         <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
-          <button type="button" name="button" class="btn btn-sm btn-info"
-            style="margin-right: 10px !important">Edit</button>
+          <button type="button" name="button" class="btn btn-sm btn-info" style="margin-right: 10px !important">Edit</button>
         </a>
         <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy">
           <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
